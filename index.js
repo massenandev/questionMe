@@ -1,5 +1,15 @@
 const express = require("express")
 const app = express()
+const connection = require('./database/database')
+//chamar a conexão
+connection
+  .authenticate()
+  .then(() => {
+    console.log('success')
+  })
+    .catch((errorMsg) => {
+      console.log(errorMsg)
+  })
 
 //permite com que envie os dados do form e o express traduz numa estrutura q consiga usar no back
 //decodifica os dados enviados pelo form, em outras palavras
