@@ -8,6 +8,21 @@
 </head>
 <body>
   <h1>QuestionMe</h1>
-</body>
+  <hr>
+  <h3>Question List</h3>
 
+  <!-- somente usa o ( < % = ) (igual) qnd se quer pegar o valor de uma variável -->
+  <p>Name: <%= name %> </p>
+  <p>Language: <%= lang %> </p>
+  <p>Company: <%= company %></p>
+  <p>Subscribers: <%= subscribers %></p>
+
+<!--Pra se trabalhar somente com expressão, não precisa do igual ( = )-->
+<% if(msg){ %>
+  <h3>This is a error message</h3>
+<% } else { %>
+  <h3>No errors</h3>
+<% } %> 
+
+</body>
 </html>
