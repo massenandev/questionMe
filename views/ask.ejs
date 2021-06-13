@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>QuestionMe</title>
+  <!--automaticamente, o express já vai procurar por uma pasta css dentro da pasta public. 
+    Por isso, não precisa ser public/css/arquivo.css-->
+    <!--pra customizar o bootstrap, primeiro carrega o BS e depois o css com as customimzações-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-light bg-primary">
+    <a class="navbar-brand" href="/">
+      <img class="image" src="/img/question-mark.png">
+    </a>
+  </nav>
+  <div class="container">
+    <div class="card" id="question-form">
+      <div class="card-header">
+        <h3>What is your doubt?</h3>
+      </div>
+      <div class="card-body">
+        <form>
+          <label>Title</label>
+          <input type="text" placeholder="Title" class="form-control">
+          <br>
+          <label>Description</label>
+          <textarea placeholder="Describe your question here" class="form-control"></textarea>
+          <br>
+          <button class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js"></script>
+</html>
