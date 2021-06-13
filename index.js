@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const connection = require('./database/database')
+const Question = require('./database/question')
 //chamar a conexão
 connection
   .authenticate()
@@ -23,7 +24,15 @@ app.use(express.static('public'))
 
 
 app.get('/', (req,res) => {
-  res.render('index')
+  //equivalent ao select * from questions;
+  //raw: so trazer os dados e nada mais
+  Question.findAll({ raw: true, order: [
+    ['id', 'DESC']
+  ]}).then(questions => {
+    res.render('index', {
+      questions
+    })
+  })
 })
 
 app.get('/ask', (req, res) => {
@@ -33,7 +42,29 @@ app.get('/ask', (req, res) => {
 app.post('/save', (req, res) => {
   const title = req.body.title
   const description = req.body.description
-  res.send('Form accepted. Title: ' + title + '. ' + 'Description: ' + description)
+  //salva através do create (como se fosse o insert)
+  Question.create({
+    title,
+    description
+  }).then(() => {
+    res.redirect('/')
+  })
+})
+
+app.get('/question/:id', (req, res) => {
+  let id = req.params.id
+  Question.findOne({
+    where: { id: id }
+  }).then(question => {
+    if(question != undefined){
+      res.render('question', {
+        //pra usar a variavel question na view
+        question
+      })
+    }else {
+      res.redirect('/')
+    }
+  })
 })
 
 app.listen(8081, () => { console.log("app running") })
