@@ -1,7 +1,8 @@
 const express = require("express")
 const app = express()
 const connection = require('./database/database')
-const Question = require('./database/question')
+const Question = require('./database/Question')
+const Answer = require('./database/Answer')
 //chamar a conexão
 connection
   .authenticate()
@@ -52,18 +53,38 @@ app.post('/save', (req, res) => {
 })
 
 app.get('/question/:id', (req, res) => {
-  let id = req.params.id
+  const id = req.params.id
+
   Question.findOne({
     where: { id: id }
   }).then(question => {
     if(question != undefined){
-      res.render('question', {
-        //pra usar a variavel question na view
-        question
+      //busca no bd pra pegar as respostas
+      Answer.findAll({
+        where: { questionId: question.id }
+      }).then(answers => {
+        res.render('question', {
+          //pra usar a variavel question na view
+          question,
+          answers
+        })
       })
     }else {
       res.redirect('/')
     }
+  })
+})
+
+app.post('/answer', (req, res) => {
+  const body = req.body.body
+  const questionId = req.body.questionId
+
+  Answer.create({
+    //ambos vêm do formulário
+    body,
+    questionId
+  }).then(() => {
+    res.redirect(`/question/${questionId}`)
   })
 })
 

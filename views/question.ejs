@@ -6,6 +6,20 @@
     <h1><%= question.title %></h1>
     <p><%= question.description %></p>
     <hr>
+    <form action="/answer" method="post">
+      <h3>Answer</h3>
+      <textarea placeholder="Type your answer" class="form-control" name="body"></textarea><br>
+      <!--campo escondido pra carregar dinamicamente o id pra saber qual a pergunta essa resposta responde-->
+      <input type="hidden" name="questionId" value="<%= question.id%>">
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    <hr>
+    <h3>Answers</h3>
+    <hr>
+    <% answers.forEach(answer => { %>
+      <%= answer.body %> 
+    <% }) %> 
   </div>
-</body>
-<%- include ('partials/footer.ejs') %> 
+  <!--TODO: emitir um alerta ao enviar resposta-->
+  </body>
+  <%- include ('partials/footer.ejs') %> 
