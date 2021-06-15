@@ -61,7 +61,13 @@ app.get('/question/:id', (req, res) => {
     if(question != undefined){
       //busca no bd pra pegar as respostas
       Answer.findAll({
-        where: { questionId: question.id }
+        where: { questionId: question.id },
+        order: [
+          [
+            'id', 
+            'DESC'
+          ]
+        ]
       }).then(answers => {
         res.render('question', {
           //pra usar a variavel question na view
